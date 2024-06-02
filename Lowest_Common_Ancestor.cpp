@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root == NULL) return NULL;
+        if(root == q || root == p) return root;
+        TreeNode* left =  lowestCommonAncestor(root->left, p, q);
+        TreeNode* Right = lowestCommonAncestor(root->right, p, q);
+        if((left == p || left == q) && (Right == p || Right == q)) return root;
+        else {
+            if(left == NULL) return Right;
+            else return left;
+        }
+    }
+};
